@@ -1,6 +1,6 @@
 // This class was first the class ActiveDirectoryBrowser from terrancesnyder, I've modified it to get user groups
 // and I also don't need to specify a ldap server as I connect on the DNS to get url of the Active Directory servers
-package christophethiry.com.github.javasrc.activedirectory;
+package com.github.javasrc.activedirectory;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

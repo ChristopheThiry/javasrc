@@ -1,4 +1,4 @@
-package christophethiry.com.github.javasrc.activedirectory;
+package com.github.javasrc.activedirectory;
 
 import java.util.ArrayList;
 import java.util.List;

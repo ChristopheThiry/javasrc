@@ -1,6 +1,6 @@
-package christophethiry.com.github.javasrc;
+package com.github.javasrc;
 
-import christophethiry.com.github.javasrc.activedirectory.ActiveDirectoryManager;
+import com.github.javasrc.activedirectory.ActiveDirectoryManager;
 
 public class App {
 	public static void main(String[] args) {

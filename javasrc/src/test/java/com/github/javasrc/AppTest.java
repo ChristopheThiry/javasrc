@@ -1,4 +1,4 @@
-package christophethiry.com.github.javasrc;
+package com.github.javasrc;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
