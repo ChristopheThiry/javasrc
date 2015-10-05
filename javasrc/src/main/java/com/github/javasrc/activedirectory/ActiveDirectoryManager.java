@@ -1,5 +1,6 @@
 // This class was first the class ActiveDirectoryBrowser from terrancesnyder, I've modified it to get user groups
-// and I also don't need to specify a ldap server as I connect on the DNS to get url of the Active Directory servers
+// and I also don't need to specify a LDAP server as I connect on the DNS to get url of the Active Directory servers
+// I've also added a method to return all groups from active directory as someone requested such a functionality
 package com.github.javasrc.activedirectory;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class ActiveDirectoryManager {
 	}
 
 	/**
-	 * Get an
+	 * Get a user
 	 * 
 	 * @param query
 	 * @return
@@ -124,6 +125,29 @@ public class ActiveDirectoryManager {
 		}
 
 		return users;
+	}
+
+	public List<String> getGroupList() {
+		List<String> result = new ArrayList<String>();
+		LdapContext ctx = null;
+		try {
+			ctx = new InitialLdapContext(getConnectionSettings(), null);
+			SearchControls ctls = new SearchControls();
+			String[] attrIDs = { "cn" };
+			ctls.setReturningAttributes(attrIDs);
+			ctls.setSearchScope(SearchControls.ONELEVEL_SCOPE);
+			NamingEnumeration answer = ctx.search("cn=users," + this.organizationalUnit, "(objectclass=group)", ctls);
+			while (answer.hasMore()) {
+				SearchResult rslt = (SearchResult) answer.next();
+				Attributes attrs = rslt.getAttributes();
+				result.add(attrs.get("cn").get().toString());
+			}
+
+			ctx.close();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	private List<String> getUserGroups(ActiveDirectoryUser user) throws Exception {
